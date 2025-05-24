@@ -1,3 +1,4 @@
+// src/pages/Register.jsx
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { supabase } from "../../lib/supabaseClient";
@@ -21,25 +22,29 @@ function Register() {
     if (password !== confirmPass) return alert("Passwords do not match");
     if (!userRole) return alert("Select a role");
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: "http://localhost:3000/verify", // Adjust as needed
-        data: {
-          name: userName,
-          role: userRole,
-        },
-      },
+      options: { emailRedirectTo: "http://localhost:5173/verify" },
     });
 
-    if (error) {
-      console.error("auth.signUp error:", error);
-      return alert("Registration failed: " + error.message);
+    if (signUpError) {
+      console.error("Sign-up error:", signUpError);
+      return alert("Registration failed: " + signUpError.message);
     }
 
-    alert("✅ Registration successful! Please check your email and verify your account before logging in.");
-    // Optionally, you could clear the form
+    localStorage.setItem(
+      "pending_user",
+      JSON.stringify({
+        email,
+        username: userName,
+        role: userRole,
+      })
+    );
+
+    alert("✅ Registration successful! Please check your email to verify.");
+
+    // Clear form
     setEmail("");
     setPassword("");
     setConfirmPass("");
@@ -48,8 +53,8 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-sky-100 dark:bg-gray-900 flex items-center justify-center px-4 py-12 transition-colors duration-300">
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-8 rounded-xl shadow-xl">
+    <div className="min-h-screen bg-sky-100 dark:bg-gray-900 flex items-center justify-center px-4 sm:px-6 md:px-8 py-12 sm:py-16 lg:py-20 transition-colors duration-300">
+      <div className="w-full max-w-md md:max-w-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-8 rounded-xl shadow-xl">
         <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">Register</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <input

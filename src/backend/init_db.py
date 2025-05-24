@@ -1,8 +1,6 @@
 import sqlite3
-
 conn = sqlite3.connect('quiz.db')
 cursor = conn.cursor()
-
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS questions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,8 +11,6 @@ cursor.execute('''
         difficulty TEXT
     )
 ''')
-
-# Example insert
 cursor.execute('''
     INSERT INTO questions (question, options, correct_answer, category, difficulty)
     VALUES (?, ?, ?, ?, ?)
@@ -25,7 +21,5 @@ cursor.execute('''
     "General Knowledge",
     "Easy"
 ))
-
 conn.commit()
 conn.close()
-print("✅ Database initialized and 1 question inserted.")

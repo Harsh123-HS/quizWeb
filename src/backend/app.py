@@ -1,43 +1,40 @@
+
+# === Flask + SQLite app.py ===
 from flask import Flask, jsonify, request
 import sqlite3
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/questions", methods=["GET"])
 def get_questions():
-    conn = sqlite3.connect("quiz.db")
+    conn = sqlite3.connect('quiz.db')
     cursor = conn.cursor()
-
-    category = request.args.get("category")
-    difficulty = request.args.get("difficulty")
-    amount = int(request.args.get("amount", 5))
-
-    query = "SELECT question, options, correct_answer, category, difficulty FROM questions WHERE 1=1"
-    params = []
-
-    if category:
-        query += " AND category = ?"
-        params.append(category)
-    if difficulty:
-        query += " AND difficulty = ?"
-        params.append(difficulty)
-
-    query += " LIMIT ?"
-    params.append(amount)
-
-    cursor.execute(query, params)
+    cursor.execute("SELECT * FROM questions")
     rows = cursor.fetchall()
     conn.close()
 
     questions = []
     for row in rows:
-        q, opts, ans, cat, diff = row
         questions.append({
-            "question": q,
-            "options": opts.split("|"),
-            "correct_answer": ans,
-            "category": cat,
-            "difficulty": diff
+            "id": row[0],
+            "question": row[1],
+            "options": row[2].split("|"),
+            "correct_answer": row[3],
+            "category": row[4],
+            "difficulty": row[5]
         })
-
     return jsonify({"questions": questions})
+
+@app.route("/questions", methods=["POST"])
+def add_question():
+    data = request.get_json()
+    conn = sqlite3.connect('quiz.db')
+    cursor = conn.cursor()
+    cursor.execute('''INSERT INTO questions (question, options, correct_answer, category, difficulty) 
+                      VALUES (?, ?, ?, ?, ?)''', 
+                      (data["question"], "|".join(data["options"]), data["correct_answer"], data["category"], data["difficulty"]))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Question added successfully!"}), 201

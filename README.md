@@ -23,3 +23,10 @@ Entertainment: Comics
 Science: Gadgets
 Entertainment: Japanese Anime & Manga
 Entertainment: Cartoon & Animations
+
+
+python -m venv venv 
+.\venv\Scripts\Activate   
+cd C:\Users\hp\first-react\viteproject\projects\quizWeb\src\backend        
+ pip install fastapi uvicorn sqlalchemy passlib[bcrypt] pydantic python-dotenv requests  
+ uvicorn main:app --reload --port 5000                                                                   
