@@ -16,7 +16,7 @@ function Profile() {
       setError("");
 
       try {
-        const { data: authData, error: authError } = await supabase.auth.getUser();
+        const {data: authData, error: authError } = await supabase.auth.getUser();
 
         if (authError || !authData?.user) {
           throw new Error("Failed to get authenticated user.");
@@ -46,6 +46,7 @@ function Profile() {
     fetchProfile();
   }, []);
 
+  
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-sky-50 dark:bg-gray-900 text-xl text-blue-600 dark:text-orange-400">

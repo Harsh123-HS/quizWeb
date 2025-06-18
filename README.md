@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 the valid quiz fields are
 General Knowledge
 Entertainment: Books
@@ -30,3 +31,6 @@ python -m venv venv
 cd C:\Users\hp\first-react\viteproject\projects\quizWeb\src\backend        
  pip install fastapi uvicorn sqlalchemy passlib[bcrypt] pydantic python-dotenv requests  
  uvicorn main:app --reload --port 5000                                                                   
+=======
+# quizWeb
+>>>>>>> 70e3f24609b1ecd1a716bdea439a5fd4ceebb385
