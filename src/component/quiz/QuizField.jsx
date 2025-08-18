@@ -37,25 +37,34 @@ export default function QuizField() {
     }
   }, [passedCategory]);
 
-  const handleStartQuiz = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch(
-        `http://localhost:5000/questions?amount=5&category=${category}&difficulty=${difficulty}`
-      );
-      const data = await res.json();
-      setQuestions(data.questions);
-      setShowQuizPage(true);
-      setTimeout(() => {
-        questionRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    } catch (err) {
-      console.error("Failed to fetch questions", err);
-      alert("Failed to fetch questions.");
-    } finally {
-      setLoading(false);
+ const handleStartQuiz = async () => {
+  try {
+    setLoading(true);
+
+    const baseUrl = import.meta.env.VITE_API_URL; // backend URL from env
+    const res = await fetch(
+      `${baseUrl}/questions?amount=5&category=${category}&difficulty=${difficulty}`
+    );
+
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status}`);
     }
-  };
+
+    const data = await res.json();
+    setQuestions(data.questions);
+    setShowQuizPage(true);
+
+    setTimeout(() => {
+      questionRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  } catch (err) {
+    console.error("Failed to fetch questions", err);
+    alert("Failed to fetch questions.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleQuizComplete = async ({ score, total }) => {
     if (!session?.user) {
