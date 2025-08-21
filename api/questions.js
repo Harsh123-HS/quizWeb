@@ -1,5 +1,6 @@
 // api/questions.js
-import { fetchOpenTDBQuestions } from "src/backend/utils.js";
+import { fetchOpenTDBQuestions } from "../src/backend/utils.js";
+
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
