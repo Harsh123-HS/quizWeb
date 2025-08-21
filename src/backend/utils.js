@@ -65,6 +65,9 @@ export async function fetchOpenTDBQuestions(
       }
     } catch {
       // ignore; retry with backoff
+       if (attempt === retries - 1) {
+    console.error("OpenTDB fetch failed:", err.message);
+  }
     }
     await new Promise((r) => setTimeout(r, delay * (attempt + 1)));
   }

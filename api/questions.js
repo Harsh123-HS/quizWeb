@@ -1,6 +1,5 @@
 // api/questions.js
-import { fetchOpenTDBQuestions } from "./src/backend/utils.js";
-// api/questions.js
+import { fetchOpenTDBQuestions } from "../src/backend/utils.js";
 export const config = { runtime: "nodejs" };
 
 
