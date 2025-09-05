@@ -1,4 +1,3 @@
-// hay chatgpt add a "Introduce a conversational aspect, where the quizmaster (or a bot) asks questions in a friendly or themed way (e.g., "Let's play a game! Here’s the first challenge...")."
 import { useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import AOS from "aos";

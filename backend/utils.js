@@ -1,4 +1,4 @@
-// src/backend/utils.js
+// backend/utils.js
 import axios from "axios";
 
 function decodeBase64String(encodedStr) {

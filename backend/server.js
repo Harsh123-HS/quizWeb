@@ -1,4 +1,4 @@
-// server.js (for local dev only)
+// server.js
 import express from "express";
 import cors from "cors";
 import { fetchOpenTDBQuestions } from "./utils.js";
@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 
 app.get("/", (_req, res) => {
-  res.json({ message: "Local dev API is up and running!" });
+  res.json({ message: "API is up and running!" });
 });
 
 app.get("/questions", async (req, res) => {
@@ -28,6 +28,7 @@ app.get("/questions", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Local API running on http://localhost:${PORT}`);
+// 👇 Important: bind to 0.0.0.0 for Render
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ API running on port ${PORT}`);
 });
