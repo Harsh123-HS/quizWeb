@@ -16,7 +16,6 @@ app.get("/questions", async (req, res) => {
   const amount = parseInt(req.query.amount) || 5;
   const category = parseInt(req.query.category) || 9;
   const difficulty = req.query.difficulty || "medium";
-
   try {
     const questions = await fetchOpenTDBQuestions(amount, category, difficulty);
     if (!questions?.length) {

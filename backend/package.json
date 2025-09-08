@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "concurrently \"npm run dev-react\" \"npm run dev-backend\"",
     "dev-react": "vite",
-    "dev-backend": "nodemon backend/server.js",
+    "dev-backend": "nodemon server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node backend/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
