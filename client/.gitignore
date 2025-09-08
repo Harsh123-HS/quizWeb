@@ -1,0 +1,69 @@
+# === Node.js / React ===
+node_modules/
+build/
+dist/
+.env
+.env.local
+.vite/
+.cache/
+.npm/
+.yarn/
+package-lock.json
+yarn.lock
+.DS_Store
+
+# === Vite / React specific ===
+.vite
+*.log
+*.tgz
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+.Python
+env/
+venv/
+ENV/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === Database files ===
+*.sqlite3
+*.db
+*.sql
+
+# === Test / Coverage ===
+htmlcov/
+coverage.xml
+*.cover
+.cache/
+.tox/
+.noseids
+.pytest_cache/
+.pytype/
+
+# === Jupyter Notebooks ===
+.ipynb_checkpoints/
+
+# === VS Code ===
+.vscode/
+
+# === macOS / Linux / Windows ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Logs / Dumps ===
+*.log
+*.out
+*.pid
+
+# === Misc ===
+*.swp
+*.bak
+*.tmppublic/QuizApp.sql
